@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, Pressable } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+// import FastImage from 'react-native-fast-image';
 
 export default function Destanation({ cityName }) {
   const [city, setCity] = useState('city');

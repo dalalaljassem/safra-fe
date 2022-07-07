@@ -1,6 +1,13 @@
-import { SafeAreaView, Text, StyleSheet, Image, View } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  Image,
+  View,
+  ScrollView,
+} from 'react-native';
+// import FastImage from 'react-native-fast-image';
+import Carousel from 'react-native-snap-carousel';
 
 export default function DestinationDetails({ route }) {
   const destination = route.params.destination;
@@ -34,19 +41,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   destinationImage: {
-    flex: 2,
+    flex: 4,
     width: '100%',
     height: 100,
   },
   namePrice: {
     padding: 10,
-    flex: 3,
+    flex: 2,
     width: '100%',
     height: 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   attractions: {
-    flex: 1,
+    flex: 2,
   },
 });

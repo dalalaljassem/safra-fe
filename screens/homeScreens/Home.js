@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
+import userStore from '../../stores/userStore';
 
-export default function MiddleScreen() {
+export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Middle Screen</Text>
+      <Text>Home Screen</Text>
     </SafeAreaView>
   );
 }

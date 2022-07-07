@@ -1,16 +1,21 @@
 import { createStackNavigator } from '@react-navigation/stack';
-
-import MiddleScreen from '../screens/middleScreens/MiddleScreen';
+import DestinationsList from '../screens/middleScreens/DestinationsList';
+import DestinationDetails from '../screens/middleScreens/DestinationDetails';
 
 const MiddleNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
   return (
     <Navigator
       screenOptions={{
-        headerShown: false,
+        headerTitle: '',
+        headerTransparent: true,
+        cardStyle: {
+          backgroundColor: 'white',
+        },
       }}
     >
-      <Screen name="Home" component={MiddleScreen} />
+      <Screen name="Home" component={DestinationsList} />
+      <Screen name="DestinationDetails" component={DestinationDetails} />
     </Navigator>
   );
 };
