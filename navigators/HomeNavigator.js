@@ -4,10 +4,15 @@ import GroupDetails from "../screens/homeScreens/GroupDetails";
 import GroupAddModal from "../components/GroupAddModal";
 const HomeNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
+
   return (
     <Navigator
       screenOptions={{
-        headerShown: false,
+        headerTitle: '',
+        headerTransparent: true,
+        cardStyle: {
+          backgroundColor: 'white',
+        },
       }}
     >
       <Screen name="Home" component={HomePage} />

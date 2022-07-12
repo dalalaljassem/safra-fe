@@ -7,7 +7,11 @@ const ProfileNavigator = () => {
   return (
     <Navigator
       screenOptions={{
-        headerShown: false,
+        headerTitle: '',
+        headerTransparent: true,
+        cardStyle: {
+          backgroundColor: 'white',
+        },
       }}
     >
       <Screen name="Home" component={ProfileScreen} />
