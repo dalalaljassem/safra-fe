@@ -6,15 +6,15 @@ import {
   SafeAreaView,
   Image,
   Pressable,
-} from 'react-native';
-import { useState } from 'react';
-import userStore from '../../stores/userStore';
-import React from 'react';
+} from "react-native";
+import { useState } from "react";
+import React from "react";
+import userStore from "../../components/stores/userStore";
 
 export default function Login() {
   const [user, setUser] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const handleChange = (name, value) => {

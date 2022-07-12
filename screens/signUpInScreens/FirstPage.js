@@ -6,27 +6,23 @@ import {
   Image,
   SafeAreaView,
   Pressable,
-} from 'react-native';
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function FirstPage() {
   const navigation = useNavigation();
   const goToSignUp = () => {
-    navigation.navigate('SignUp');
+    navigation.navigate("SignUp");
   };
   const goToLogin = () => {
-    navigation.navigate('Login');
+    navigation.navigate("Login");
   };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logowithName}>
-        <Image
-          style={styles.logo}
-          source={{
-            uri: 'https://img.freepik.com/free-vector/three-airplanes-flying-around-globe-isolated-blue-background-flat-stock-vector-illustration-flights-eps10_127746-3623.jpg?w=2000',
-          }}
-        />
+        <Image style={styles.logo} source={require("../../assets/globe.png")} />
+
         <Text style={styles.appName}>SAFRA</Text>
       </View>
       <View style={styles.decide}>
@@ -49,60 +45,60 @@ export default function FirstPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginVertical: '30%',
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginVertical: "30%",
   },
   logowithName: {
     flex: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   logo: {
     width: 160,
     height: 160,
-    marginBottom: '3%',
+    marginBottom: "3%",
   },
   appName: {
     fontSize: 50,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   decide: {
     flex: 2,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   decideText: {
-    fontWeight: '600',
+    fontWeight: "600",
     fontSize: 27,
-    marginBottom: '2%',
+    marginBottom: "2%",
   },
   grabText: {
-    color: 'grey',
+    color: "grey",
   },
   signUpLogin: {
     flex: 3,
-    marginTop: '10%',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    marginTop: "10%",
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
   signUpButton: {
-    backgroundColor: '#63C9B3',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '16%',
-    paddingHorizontal: '22%',
+    backgroundColor: "#63C9B3",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "16%",
+    paddingHorizontal: "22%",
     borderRadius: 20,
   },
   signUpButtonText: {
-    color: 'white',
-    fontWeight: '500',
+    color: "white",
+    fontWeight: "500",
     fontSize: 20,
   },
   loginPageButton: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'black',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "black",
   },
 });

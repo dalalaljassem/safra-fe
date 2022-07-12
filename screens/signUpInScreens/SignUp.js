@@ -6,16 +6,16 @@ import {
   SafeAreaView,
   Image,
   Pressable,
-} from 'react-native';
-import { useState } from 'react';
-import userStore from '../../stores/userStore';
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { useState } from "react";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import userStore from "../../components/stores/userStore";
 
 export default function Login() {
   const [user, setUser] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
   const navigation = useNavigation();
 
@@ -30,12 +30,7 @@ export default function Login() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logowithName}>
-        <Image
-          style={styles.logo}
-          source={{
-            uri: 'https://img.freepik.com/free-vector/three-airplanes-flying-around-globe-isolated-blue-background-flat-stock-vector-illustration-flights-eps10_127746-3623.jpg?w=2000',
-          }}
-        />
+        <Image style={styles.logo} source={require("../../assets/globe.png")} />
         <Text style={styles.appName}>SAFRA</Text>
       </View>
       <View style={styles.inputView}>
@@ -44,7 +39,7 @@ export default function Login() {
           <TextInput
             style={styles.input}
             onChangeText={(text) => {
-              handleChange('username', text);
+              handleChange("username", text);
             }}
           />
         </View>
@@ -55,7 +50,7 @@ export default function Login() {
             style={styles.input}
             secureTextEntry={true}
             onChangeText={(text) => {
-              handleChange('password', text);
+              handleChange("password", text);
             }}
           />
         </View>
@@ -70,62 +65,62 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginVertical: '30%',
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginVertical: "30%",
   },
   logowithName: {
     flex: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   logo: {
     width: 160,
     height: 160,
-    marginBottom: '3%',
+    marginBottom: "3%",
   },
   appName: {
     fontSize: 50,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   inputView: {
     flex: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   inputNameAndField: {
     width: 220,
-    margin: '3%',
+    margin: "3%",
   },
 
   input: {
     height: 40,
     borderWidth: 1,
     padding: 10,
-    borderRadius: '10%',
+    borderRadius: "10%",
     // borderColor: '#63C9B3',
-    marginTop: '3%',
+    marginTop: "3%",
     fontSize: 20,
   },
   inputText: {
     fontSize: 12,
-    color: 'grey',
-    marginLeft: '2%',
-    marginBottom: '1%',
+    color: "grey",
+    marginLeft: "2%",
+    marginBottom: "1%",
   },
 
   signInButton: {
-    backgroundColor: '#63C9B3',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '9%',
-    paddingHorizontal: '22%',
+    backgroundColor: "#63C9B3",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "9%",
+    paddingHorizontal: "22%",
     borderRadius: 20,
-    marginTop: '10%',
+    marginTop: "10%",
   },
   signInButtonText: {
-    color: 'white',
-    fontWeight: '500',
+    color: "white",
+    fontWeight: "500",
     fontSize: 20,
   },
 });

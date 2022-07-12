@@ -1,7 +1,7 @@
-import { createStackNavigator } from '@react-navigation/stack';
-
-import HomeScreen from '../screens/homeScreens/Home';
-
+import { createStackNavigator } from "@react-navigation/stack";
+import HomePage from "../screens/homeScreens/HomePage";
+import GroupDetails from "../screens/homeScreens/GroupDetails";
+import GroupAddModal from "../components/GroupAddModal";
 const HomeNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
 
@@ -15,7 +15,9 @@ const HomeNavigator = () => {
         },
       }}
     >
-      <Screen name="Home" component={HomeScreen} />
+      <Screen name="Home" component={HomePage} />
+      <Screen name="GroupDetails" component={GroupDetails} />
+      <Screen name="GroupAddModal" component={GroupAddModal} />
     </Navigator>
   );
 };

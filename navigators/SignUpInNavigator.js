@@ -1,18 +1,18 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import FirstPage from '../screens/signUpInScreens/FirstPage';
-import Login from '../screens/signUpInScreens/Login';
-import SignUp from '../screens/signUpInScreens/SignUp';
-import ProfileScreen from '../screens/profileScreens/ProfileScreen';
+import { createStackNavigator } from "@react-navigation/stack";
+import FirstPage from "../screens/signUpInScreens/FirstPage";
+import Login from "../screens/signUpInScreens/Login";
+import SignUp from "../screens/signUpInScreens/SignUp";
+import ProfileScreen from "../screens/profileScreens/ProfileScreen";
 
 const SignUpInNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
   return (
     <Navigator
       screenOptions={{
-        headerTitle: '',
+        headerTitle: "",
         headerTransparent: true,
         cardStyle: {
-          backgroundColor: 'white',
+          backgroundColor: "white",
         },
       }}
     >
