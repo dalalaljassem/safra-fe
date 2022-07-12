@@ -1,20 +1,26 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native";
+// import { NativeBaseProvider } from 'native-base';
+import { NavigationContainer } from "@react-navigation/native";
+import BottomNav from "./navigators/BottomNav";
+import { Provider as PaperProvider } from "react-native-paper";
+import { ThemeProvider } from "@rneui/themed";
+import userStore from "./components/stores/userStore";
+import { observer } from "mobx-react";
+import Toast from "react-native-toast-message";
+import SignUpInNavigator from "./navigators/SignUpInNavigator";
 
-export default function App() {
+function App() {
+  const checkUser = userStore.user;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider>
+      <PaperProvider>
+        <NavigationContainer>
+          {checkUser ? <BottomNav /> : <SignUpInNavigator />}
+          <Toast />
+        </NavigationContainer>
+      </PaperProvider>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default observer(App);
