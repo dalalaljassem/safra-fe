@@ -10,7 +10,6 @@ export default function GroupDetails({ route }) {
       <>
         <View style={styles.infoContainer}>
           <Text style={styles.title}>{group.title}</Text>
-          {/* <Text style={styles.title}>group title</Text> */}
         </View>
       </>
     </SafeAreaView>

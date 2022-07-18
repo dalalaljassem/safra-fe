@@ -11,11 +11,18 @@ const GroupAddModal = ({ navigation }) => {
     finalBudget: "",
     finalDepartDate: "",
     finalReturnDate: "",
-    finalActivities: "",
+    finalActivities: [],
   });
 
   const handleSubmit = async () => {
-    await groupStore.groupCreate({ ...group, UserId: userStore.user._id });
+    // await groupStore.groupCreate({ ...group, admin: userStore.user._id });
+    (await groupStore.groupCreate({ ...group, admin: userStore.user._id })) &
+      groupStore.groupGet();
+
+    console.log(
+      "🚀 ~ file: GroupAddModal.js ~ line 19 ~ handleSubmit ~ group",
+      group
+    );
     navigation.navigate("Home");
   };
 
@@ -36,21 +43,18 @@ const GroupAddModal = ({ navigation }) => {
           }}
           placeholder="Group image"
         />
-
         <Input
           onChangeText={(finalDepartDate) => {
             setGroup({ ...group, finalDepartDate });
           }}
           placeholder="Group Depart Date"
         />
-
         <Input
           onChangeText={(finalReturnDate) => {
             setGroup({ ...group, finalReturnDate });
           }}
           placeholder="Group Return Date"
         />
-
         <Input
           onChangeText={(finalBudget) => {
             setGroup({ ...group, finalBudget });
