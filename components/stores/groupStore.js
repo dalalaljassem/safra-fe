@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import instance from "../../axios/instance";
 class GroupStore {
   groups = [];
+  UserGroup = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -19,8 +20,9 @@ class GroupStore {
   fetchGroup = async (groupId) => {
     this.groups = this.groups.filter((group) => group._id !== groupId);
     try {
-      const response = await axios.get(`/${groupId}`, groupId);
-      this.groups = response.data;
+      const response = await instance.get(`/groups/${groupId}`);
+      UserGroup.push(response.data);
+      // this.groups = response.data;
       // this.groups.push(response.data);
     } catch (error) {
       console.log("GroupStore -> fetchGroup -> error", error);
@@ -30,7 +32,7 @@ class GroupStore {
   groupUpdate = async (groupId) => {
     this.groups = this.groups.filter((group) => group._id !== groupId);
     try {
-      const response = await axios.put(`/${groupId}`, groupId);
+      const response = await instance.put(`/${groupId}`, groupId);
       this.groups = response.data;
       this.groups.push(response.data);
     } catch (error) {
@@ -49,11 +51,16 @@ class GroupStore {
 
   groupCreate = async (groupData) => {
     try {
-      const formData = new FormData();
-      for (const key in groupData) formData.append(key, groupData[key]);
-      const response = await instance.post("/groups", formData);
+      // const formData = new FormData();
+      // console.log(
+      //   "🚀 ~ file: groupStore.js ~ line 61 ~ GroupStore ~ groupCreate= ~ formData",
+      //   formData
+      // );
+      // for (const key in groupData) formData.append(key, groupData[key]);
+      const response = await instance.post("/groups", groupData);
       // this.groups = response.data;
       this.groups.push(response.data);
+      //userStore.groups.push(response.data)
     } catch (error) {
       console.log("GroupStore -> groupCreate -> error", error);
     }
