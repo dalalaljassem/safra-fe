@@ -19,10 +19,10 @@ const GroupAddModal = ({ navigation }) => {
     (await groupStore.groupCreate({ ...group, admin: userStore.user._id })) &
       groupStore.groupGet();
 
-    console.log(
-      "🚀 ~ file: GroupAddModal.js ~ line 19 ~ handleSubmit ~ group",
-      group
-    );
+    // console.log(
+    //   "🚀 ~ file: GroupAddModal.js ~ line 19 ~ handleSubmit ~ group",
+    //   group
+    // );
     navigation.navigate("Home");
   };
 

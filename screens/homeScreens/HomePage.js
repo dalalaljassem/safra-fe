@@ -17,12 +17,7 @@ import GroupAddModal from "../../components/GroupAddModal";
 //group list
 
 export default function HomePage({ group, navigation }) {
-  // const groups1 = userStore.user.groups;
-  // const userGroup = userStore.user.groups;
   const groups = groupStore.groups;
-  // const userGroupArray = userGroup.map((groupId) => {
-  //   groupStore.fetchGroup(groupId);
-  // });
   const [refreshing, setRefreshing] = useState(false);
 
   const wait = (timeout) => {
@@ -54,8 +49,8 @@ export default function HomePage({ group, navigation }) {
           </TouchableOpacity>
         </View>
 
-        {groups.map((item) => (
-          <Groups key={item._id} group={item} />
+        {groups.map((g) => (
+          <Groups group={g} />
         ))}
       </ScrollView>
     </SafeAreaView>
