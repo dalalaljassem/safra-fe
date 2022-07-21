@@ -9,58 +9,77 @@ import {
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import userStore from '../../components/stores/userStore';
+import EditProfileButton from '../../components/EditProfileButton';
+import { observer } from 'mobx-react';
+import destinationStore from '../../components/stores/destinationStore';
 
-export default function MiddleScreen() {
-  const cc = () => {
-    console.log('pressed');
-  };
+function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Text>Profile Screen</Text> */}
       {/* <Button title="Logout" onPress={userStore.logout}></Button> */}
-      <Pressable style={styles.ellipsis} onPress={cc}>
-        <AntDesign name="ellipsis1" size={24} color="black" />
-      </Pressable>
+
+      <View style={styles.edit}>
+        <EditProfileButton />
+      </View>
+
       <View style={styles.imageUsername}>
         <Image
           resizeMode="cover"
           style={styles.image}
           source={{
-            uri: 'https://img.freepik.com/free-vector/three-airplanes-flying-around-globe-isolated-blue-background-flat-stock-vector-illustration-flights-eps10_127746-3623.jpg?w=2000',
+            uri: userStore.user.image,
           }}
         />
+
         <Text style={styles.username}>{userStore.user.username}</Text>
+        <Text style={styles.budget}>${userStore.user.budget}</Text>
       </View>
       <View style={styles.activities}>
         <Text style={styles.activitiesText}>Favourite Activities:</Text>
-        <Text style={styles.activityItemText}>Activity 1</Text>
-        <Text style={styles.activityItemText}>Activity 2</Text>
-        <Text style={styles.activityItemText}>Activity 3</Text>
+
+        {userStore.user.activities.map((activity) => (
+          <Text style={styles.activityItemText}>{activity}</Text>
+        ))}
+        {console.log(userStore.user)}
       </View>
       <View style={styles.date}>
-        <Text style={styles.dateText}>Departure Date: </Text>
-        <Text style={styles.dateText}>Return Date: </Text>
+        <Text style={styles.dateText}>
+          Departure Date:{' '}
+          {userStore.user.departDate
+            ? userStore.user.departDate.slice(0, 10)
+            : userStore.user.departDate}
+        </Text>
+        <Text style={styles.dateText}>
+          Return Date:{' '}
+          {userStore.user.returnDate
+            ? userStore.user.returnDate.slice(0, 10)
+            : userStore.user.returnDate}
+        </Text>
+        <Button
+          title="Generate Destinations"
+          onPress={() => destinationStore.getDestinationsOfActivities()}
+        />
       </View>
     </SafeAreaView>
   );
 }
-
+export default observer(ProfileScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
   },
-  ellipsis: {
+  edit: {
     alignItems: 'flex-end',
   },
   imageUsername: {
-    flex: 2,
+    flex: 4,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   image: {
     width: '50%',
-    height: '50%',
+    height: '60%',
     borderRadius: '100%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -71,10 +90,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  budget: {
+    fontSize: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   activities: {
-    flex: 1,
+    flex: 3,
     alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   activitiesText: {
     fontSize: 27,
@@ -85,7 +109,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   date: {
-    flex: 1,
+    flex: 2,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },

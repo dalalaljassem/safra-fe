@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Image, Pressable } from "react-native";
-import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Image, Pressable } from 'react-native';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 // import FastImage from 'react-native-fast-image';
 
 export default function Destanation({ cityName }) {
-  const [city, setCity] = useState("city");
+  const [city, setCity] = useState('city');
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -14,18 +14,10 @@ export default function Destanation({ cityName }) {
         const response = await axios.get(
           `https://api.unsplash.com/search/collections?page=1&orientation=landscape&query=${cityName}&client_id=W4F29sKZTmHfZXTHbXFAbK4lWQWQTGu7wGrYaCh9cZk`
         );
-        // const view = await axios.get(
-        //     `https://api.unsplash.com/search/collections?page=1&orientation=landscape&query=${cityName}&client_id=W4F29sKZTmHfZXTHbXFAbK4lWQWQTGu7wGrYaCh9cZk`
-        //   );
-        // console.log(response.data.results[0].title);
-        // response.data.results.forEach(image => {
-        //     if(image.id){
 
-        //     }
-        // })
         setCity(response.data.results[0].cover_photo.urls.full);
       } catch (error) {
-        console.log("getImage", error);
+        console.log('getImage', error);
       }
     };
     getImage();
@@ -36,7 +28,7 @@ export default function Destanation({ cityName }) {
   };
 
   const goToDetails = () => {
-    navigation.navigate("DestinationDetails", {
+    navigation.navigate('DestinationDetails', {
       destination: cityName,
       imageUrl: city,
     });
@@ -65,7 +57,7 @@ export default function Destanation({ cityName }) {
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderColor: "#cacaca",
+    borderColor: '#cacaca',
     height: 205,
     borderRadius: 9,
     marginBottom: 20,
@@ -74,7 +66,7 @@ const styles = StyleSheet.create({
     flex: 5,
     borderTopLeftRadius: 9,
     borderTopRightRadius: 9,
-    width: "100%",
+    width: '100%',
     height: 100,
   },
   destinationInfo: {
@@ -84,22 +76,22 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   destinationInfoBottomLine: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 4,
-    alignItems: "center",
+    alignItems: 'center',
   },
   price: {
-    color: "green",
+    color: 'green',
     fontSize: 21,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   greyFont: {
-    color: "grey",
+    color: 'grey',
   },
   cityNameText: {
     fontSize: 20,
-    fontWeight: "600",
+    fontWeight: '600',
     marginBottom: 3,
   },
 });

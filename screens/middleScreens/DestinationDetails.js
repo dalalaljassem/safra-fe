@@ -5,6 +5,7 @@ import {
   Image,
   View,
   ScrollView,
+  Pressable,
 } from 'react-native';
 // import FastImage from 'react-native-fast-image';
 import Carousel from 'react-native-snap-carousel';
@@ -24,13 +25,26 @@ export default function DestinationDetails({ route }) {
       <View style={styles.namePrice}>
         <View>
           <Text>{destination}</Text>
-          <Text>Country Name</Text>
+          <Text>France</Text>
         </View>
-        <Text>$300</Text>
+        <Text>$600</Text>
       </View>
       <View style={styles.attractions}>
         <Text>Attractions</Text>
       </View>
+
+      <Pressable style={styles.btn}>
+        {' '}
+        <Text>Book Tickets</Text>
+      </Pressable>
+      <Pressable style={styles.btn}>
+        {' '}
+        <Text>Find Restuarants</Text>
+      </Pressable>
+      <Pressable style={styles.btn}>
+        {' '}
+        <Text>Find Hotels</Text>
+      </Pressable>
     </View>
   );
 }
@@ -55,5 +69,8 @@ const styles = StyleSheet.create({
   },
   attractions: {
     flex: 2,
+  },
+  btn: {
+    backgroundColor: '#63C9B3',
   },
 });
