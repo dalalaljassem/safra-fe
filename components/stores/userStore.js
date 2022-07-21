@@ -72,6 +72,15 @@ class UserStore {
     delete instance.defaults.headers.common.Authorization;
   };
 
+  getUsers = async () => {
+    try {
+      const response = await instance.get("/users");
+      this.user = response.data;
+    } catch (error) {
+      console.log("GroupStore -> groupGet -> error", error);
+    }
+  };
+
   updateUser = async (updatedUser) => {
     try {
       const formData = new FormData();
@@ -82,6 +91,16 @@ class UserStore {
       console.log(error);
     }
   };
+
+  // addChat = async (list, groupId, Navigation) => {
+  //   try {
+  //     list.isChecked = false;
+  //     const response = await instance.post(`/task/new/${groupId}`, list);
+  //     this.tasks.push(response.data);
+  //     `socket.emit("frontend", "Add");`
+  //     groupStore.fetchGroups();
+  //   }
+  // }
 }
 
 const userStore = new UserStore();
