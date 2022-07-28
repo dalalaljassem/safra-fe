@@ -111,10 +111,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#63C9B3",
     justifyContent: "center",
     alignItems: "center",
-    height: "9%",
+    height: "10%",
     paddingHorizontal: "22%",
     borderRadius: 20,
     marginTop: "10%",
+    // width: "10%",
   },
   signInButtonText: {
     color: "white",
