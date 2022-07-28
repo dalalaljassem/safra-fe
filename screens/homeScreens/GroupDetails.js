@@ -5,10 +5,13 @@ import {
   Image,
   View,
   ScrollView,
+  TouchableOpacity,
   FlatList,
   ImageBackground,
 } from "react-native";
+import Toast from "react-native-toast-message";
 import React, { useState, useCallback, useEffect } from "react";
+import { PlusCircle } from "react-native-feather";
 import { GiftedChat } from "react-native-gifted-chat";
 import { observer } from "mobx-react-lite";
 import { TabView } from "@rneui/base";
@@ -39,25 +42,30 @@ export default function GroupDetails({ route }) {
   const data = [
     {
       user_id: 1,
-      user_image: group.user.image,
+      // user_image: group.user.image,
+      user_image:
+        "https://cdn.discordapp.com/attachments/990987687060209674/998986558818492456/Group_1_Ibrahim_Shaaban.JPG",
       user_name: "Ibraheem", //group.user.username
       onPress: () => navigation.navigate("ProfileScreen"),
     },
     {
       user_id: 2,
-      user_image: group.user.image,
+      user_image:
+        "https://cdn.discordapp.com/attachments/990987687060209674/998986558260658196/Group_1_Dalal_AlJassem.JPG",
       user_name: "Dalal",
       // onPress: () => navigation.navigate("Home"),
     },
     {
       user_id: 3,
-      user_image: group.user.image,
+      user_image:
+        "https://cdn.discordapp.com/attachments/990987687060209674/998986559284051978/Group_1_Rawan_AlMusallam.JPG",
       user_name: "Rawan",
       // onPress: () => navigation.navigate("Home"),
     },
     {
       user_id: 4,
-      user_image: group.user.image,
+      user_image:
+        "https://cdn.discordapp.com/attachments/990209764933902356/1002134623012266014/7AC89E63-4EC1-49BE-8983-9637B7F7AEE1.jpg",
       user_name: "Rashed",
       // onPress: () => navigation.navigate("Home"),
     },
@@ -72,7 +80,8 @@ export default function GroupDetails({ route }) {
         user: {
           _id: 2,
           name: "username", //name of users
-          avatar: group.image,
+          avatar:
+            "https://cdn.discordapp.com/attachments/990987687060209674/998986558818492456/Group_1_Ibrahim_Shaaban.JPG",
         },
       },
     ]);
@@ -89,13 +98,26 @@ export default function GroupDetails({ route }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{group.title} Group Chat</Text>
+          <Text style={styles.title}>{group.title} Group Chat </Text>
+          {/* <Text style={styles.titleBlue}> Generate </Text> */}
+          <TouchableOpacity
+            onPress={() => {
+              Toast.show({
+                type: "error",
+                text1: "Destination is now generated ✅",
+              });
+            }}
+          >
+            <PlusCircle color={"black"} />
+          </TouchableOpacity>
         </View>
 
         <InstaStory
           style={styles.story}
           data={data}
           duration={10}
+          unPressedBorderColor="gray"
+          avatarSize={70}
           onStart={(item) => console.log(item)}
           onClose={(item) => console.log("close: ", item)}
         />
@@ -114,14 +136,26 @@ export default function GroupDetails({ route }) {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingBottom: 20,
+    // flexWrap: "wrap",
+    // justifyContent: "center",
+    // alignItems: "center",
+    // paddingBottom: 20,
+    // flexDirection: "row",
+
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 30,
+    marginBottom: 20,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  titleBlue: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "blue",
+    marginLeft: 10,
   },
 
   userslisting: {

@@ -80,7 +80,7 @@ function EditGroups({ userId }) {
               </Modal.Footer>
             </Modal.Content>
           </Modal>
-          {/* <Pressable onPress={() => setIsOpen(!isOpen)}>
+          <Pressable onPress={() => setIsOpen(!isOpen)}>
             <Text style={styles.logout}>Delete Group</Text>
           </Pressable>
           <AlertDialog
@@ -113,7 +113,7 @@ function EditGroups({ userId }) {
                 </Button.Group>
               </AlertDialog.Footer>
             </AlertDialog.Content>
-          </AlertDialog> */}
+          </AlertDialog>
         </Popover.Body>
       </Popover.Content>
     </Popover>

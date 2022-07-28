@@ -65,7 +65,7 @@ export default function Group({ group }) {
           {/* :{JSON.stringify(group.userId)} */}
 
           <Text style={styles.greyFont}>
-            Members : {group.users.map((u) => u.username)}
+            Admin : {group.users.map((u) => u.username)}
           </Text>
           {console.log("🚀 ~ file: Groups.js ~ line 67 ~ Group ~ group", group)}
           {/* {console.log("🚀 ~ file: Groups.js ~ line 70 ~ Group ~ group", group)} */}
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     borderWidth: 1,
     borderColor: "#cacaca",
-    height: 205,
+    height: 200,
     borderRadius: 9,
     marginBottom: 20,
   },
