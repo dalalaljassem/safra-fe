@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import Destanation from '../../components/Destanation';
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import Destanation from "../../components/Destanation";
 
 export default function DestinationsList() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Destinations List</Text>
-      <Destanation cityName="paris" />
-      <Destanation cityName="san francesco" />
-      <Destanation cityName="sidney" />
+      <Destanation cityName="tokyo" />
+      <Destanation cityName="seoul" />
+      <Destanation cityName="sydney" />
     </SafeAreaView>
   );
 }
@@ -15,16 +15,16 @@ export default function DestinationsList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     // alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
     margin: 10,
   },
   header: {
     marginTop: 30,
     marginBottom: 20,
     fontSize: 30,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
   },
 });

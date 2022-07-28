@@ -1,12 +1,15 @@
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView } from "react-native";
 // import { NativeBaseProvider } from 'native-base';
-import { NavigationContainer } from '@react-navigation/native';
-import BottomNav from './navigators/BottomNav';
+import { NavigationContainer } from "@react-navigation/native";
+import BottomNav from "./navigators/BottomNav";
+import { NativeBaseProvider } from "native-base";
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <BottomNav />
-    </NavigationContainer>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <BottomNav />
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }

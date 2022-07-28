@@ -1,6 +1,7 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import DestinationsList from '../screens/homeScreens/DestinationsList';
-import DestinationDetails from '../screens/homeScreens/DestinationDetails';
+import { createStackNavigator } from "@react-navigation/stack";
+import DestinationsList from "../screens/homeScreens/DestinationsList";
+import DestinationDetails from "../screens/homeScreens/DestinationDetails";
+import JoinGroupScreen from "../screens/homeScreens/joinGroupScreen";
 
 const HomeNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
@@ -12,6 +13,10 @@ const HomeNavigator = () => {
     >
       <Screen name="Home" component={DestinationsList} />
       <Screen name="DestinationDetails" component={DestinationDetails} />
+
+      {/* JOINING GROUP SCREEN
+       */}
+      {/* <Screen name="JoinGroupScreen" component={JoinGroupScreen} /> */}
     </Navigator>
   );
 };

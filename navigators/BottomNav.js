@@ -1,17 +1,17 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import HomeNavigator from './HomeNavigator';
-import MiddleNavigator from './MiddleNavigator';
-import ProfileNavigator from './ProfileNavigator';
-import { StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import HomeNavigator from "./HomeNavigator";
+import MiddleNavigator from "./MiddleNavigator";
+import ProfileNavigator from "./ProfileNavigator";
+import { StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomNav() {
   const iconSize = 38;
-  const tabButtonActive = '#1e2029';
-  const tabButtonInactive = '#8D9C98';
+  const tabButtonActive = "#1e2029";
+  const tabButtonInactive = "#8D9C98";
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -67,10 +67,10 @@ export default function BottomNav() {
 
 const styles = StyleSheet.create({
   tab: {
-    backgroundColor: '#fffffc',
+    backgroundColor: "#fffffc",
     marginBottom: 10,
     marginLeft: 5,
     marginRight: 5,
-    paddingTop: '3%',
+    paddingTop: "3%",
   },
 });

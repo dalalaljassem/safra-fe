@@ -1,0 +1,22 @@
+
+{
+        "id": 0,
+        "country": "Japan",             
+
+        "city": "Tokyo",
+
+        "cost": "$300",
+
+        "lable": {"att": "Attractions", "res": "Restaurants","act":"Activities"},
+
+        "img": { "attImg": "https://res-1.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1646014276/tokyo/H_00658_001", 
+            "resImg": "https://i0.wp.com/www.agoda.com/wp-content/uploads/2019/05/Best-restaurants-in-Tokyo-Mominoki-House-Vegetarian-or-Vegan.jpg",
+            "acImg":"https://touristjourney.com/wp-content/uploads/2020/02/jezael-melgoza-layMbSJ3YOE-unsplash-scaled.jpg" },
+        "name": { "attname": "Mominoki House", "resname":"" , "actname":""},
+        "desc":{"atdesc":"Built in 1958, Tokyo Tower serves as a symbol of Tokyo's rebirth",
+            "resdesc":"a cozy restaurant in the Shibuya ward.",
+            "acdes":"Tokyo is one of the world's best shopping cities."}
+}
+
+
+

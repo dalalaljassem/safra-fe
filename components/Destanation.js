@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, Pressable } from 'react-native';
-import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Image, Pressable } from "react-native";
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Destanation({ cityName }) {
-  const [city, setCity] = useState('city');
+  const [city, setCity] = useState("city");
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Destanation({ cityName }) {
         // })
         setCity(response.data.results[0].cover_photo.urls.full);
       } catch (error) {
-        console.log('getImage', error);
+        console.log("getImage", error);
       }
     };
     getImage();
@@ -35,9 +35,11 @@ export default function Destanation({ cityName }) {
   };
 
   const goToDetails = () => {
-    navigation.navigate('DestinationDetails', {
+    navigation.navigate("DestinationDetails", {
       destination: cityName,
       imageUrl: city,
+
+      // we also need to add the BUDGET HERE
     });
   };
 
@@ -51,9 +53,12 @@ export default function Destanation({ cityName }) {
       />
       <View style={styles.destinationInfo}>
         <Text style={styles.cityNameText}>{capitalize(cityName)}</Text>
+        {/* DATE MUST BE CHANGED ALSO */}
         <Text style={styles.greyFont}>Dec 28, 2019 - Jan 01, 2020</Text>
         <View style={styles.destinationInfoBottomLine}>
+          {/* NUM OF TRAVELLERS MUST BE CHANGED */}
           <Text style={styles.greyFont}>4 Travelers</Text>
+          {/* THE PRICE MUST BE CHANGED BASED ON BUDGET OF GROUP */}
           <Text style={styles.price}>2300 USD</Text>
         </View>
       </View>
@@ -64,7 +69,7 @@ export default function Destanation({ cityName }) {
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderColor: '#cacaca',
+    borderColor: "#cacaca",
     height: 205,
     borderRadius: 9,
     marginBottom: 20,
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
     flex: 5,
     borderTopLeftRadius: 9,
     borderTopRightRadius: 9,
-    width: '100%',
+    width: "100%",
     height: 100,
   },
   destinationInfo: {
@@ -83,22 +88,22 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   destinationInfoBottomLine: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 4,
-    alignItems: 'center',
+    alignItems: "center",
   },
   price: {
-    color: 'green',
+    color: "green",
     fontSize: 21,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   greyFont: {
-    color: 'grey',
+    color: "grey",
   },
   cityNameText: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 3,
   },
 });
