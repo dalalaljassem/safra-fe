@@ -84,8 +84,9 @@ export default function Group({ group }) {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
+    backgroundColor: "#f9f9f9",
     borderWidth: 1,
-    borderColor: "#cacaca",
+    borderColor: "white",
     height: 200,
     borderRadius: 9,
     marginBottom: 20,

@@ -39,7 +39,7 @@ export default function HomePage({ group, navigation }) {
         }
       >
         <View style={styles.headerAdd}>
-          <Text style={styles.header}>My Groups</Text>
+          <Text style={styles.header}>My Groups 🌟</Text>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("GroupAddModal", { group: group })
@@ -71,5 +71,6 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 30,
+    fontWeight: "Bold",
   },
 });
