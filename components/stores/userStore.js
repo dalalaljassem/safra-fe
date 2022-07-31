@@ -1,15 +1,21 @@
-import { makeAutoObservable } from "mobx";
+// import { makeAutoObservable } from 'mobx';
+import { makeObservable, observable, action } from "mobx";
+
 // import { instance } from "../../axios/instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
 import instance from "../../axios/instance";
 class UserStore {
-  constructor() {
-    makeAutoObservable(this);
-  }
   user = null;
   userIsNew = true;
+  users = [];
+
+  constructor() {
+    makeObservable(this, {
+      user: observable,
+    });
+  }
 
   setUser = async (token) => {
     await AsyncStorage.setItem("myToken", JSON.stringify(token));
@@ -72,21 +78,31 @@ class UserStore {
     delete instance.defaults.headers.common.Authorization;
   };
 
-  getUsers = async () => {
+  // updateUser = async (updatedUser) => {
+  //   try {
+  //     const formData = new FormData();
+  //     for (const key in updatedUser) formData.append(key, updatedUser[key]);
+  //     console.log(this.user._id);
+  //     const res = await instance.put(`/${this.user._id}`, formData);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  usersGet = async () => {
     try {
       const response = await instance.get("/users");
-      this.user = response.data;
+      this.users = response.data;
     } catch (error) {
-      console.log("GroupStore -> groupGet -> error", error);
+      console.log("UserStore -> usersGet -> error", error);
     }
   };
 
-  updateUser = async (updatedUser) => {
+  updateUser = async (updatedUser, userId) => {
     try {
-      const formData = new FormData();
-      for (const key in updatedUser) formData.append(key, updatedUser[key]);
-      console.log(this.user._id);
-      const res = await instance.put(`/${this.user._id}`, formData);
+      const res = await instance.put(`/${userId}`, updatedUser);
+      this.users = this.users.map((user) =>
+        user._id === userId ? res.data : user
+      );
     } catch (error) {
       console.log(error);
     }
@@ -105,4 +121,5 @@ class UserStore {
 
 const userStore = new UserStore();
 userStore.checkForToken();
+userStore.usersGet();
 export default userStore;
