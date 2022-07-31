@@ -17,12 +17,7 @@ import GroupAddModal from "../../components/GroupAddModal";
 //group list
 
 export default function HomePage({ group, navigation }) {
-  // const groups1 = userStore.user.groups;
-  // const userGroup = userStore.user.groups;
   const groups = groupStore.groups;
-  // const userGroupArray = userGroup.map((groupId) => {
-  //   groupStore.fetchGroup(groupId);
-  // });
   const [refreshing, setRefreshing] = useState(false);
 
   const wait = (timeout) => {
@@ -44,7 +39,7 @@ export default function HomePage({ group, navigation }) {
         }
       >
         <View style={styles.headerAdd}>
-          <Text style={styles.header}>My Groups</Text>
+          <Text style={styles.header}>My Groups 🌟</Text>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("GroupAddModal", { group: group })
@@ -54,8 +49,8 @@ export default function HomePage({ group, navigation }) {
           </TouchableOpacity>
         </View>
 
-        {groups.map((item) => (
-          <Groups key={item._id} group={item} />
+        {groups.map((g) => (
+          <Groups group={g} />
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -76,5 +71,6 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 30,
+    fontWeight: "Bold",
   },
 });
