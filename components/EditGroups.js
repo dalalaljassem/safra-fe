@@ -1,28 +1,55 @@
-import { Popover, Button, Modal, FormControl, Input } from "native-base";
-import { AntDesign } from "@expo/vector-icons";
-import { Pressable, Text, StyleSheet } from "react-native";
-import { AlertDialog } from "native-base";
-import { useState } from "react";
-import React from "react";
-import groupStore from "./stores/groupStore";
-import userStore from "./stores/userStore";
+import { Popover, Button, Modal, FormControl, Input } from 'native-base';
+import { AntDesign } from '@expo/vector-icons';
+import { Pressable, Text, StyleSheet, TextInput } from 'react-native';
+import { AlertDialog } from 'native-base';
+import { useState } from 'react';
+import React from 'react';
+import groupStore from './stores/groupStore';
+import userStore from './stores/userStore';
 
-function EditGroups({ userId }) {
+function EditGroups({ userId, group }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [showModal, setShowModal] = useState(false);
   const onClose = () => setIsOpen(false);
+  const [g, setG] = useState({
+    users: [],
+  });
+  const [username, setUsername] = useState('');
+
+  const findUserByUsername = (username) => {
+    return userStore.users.find((user) => user.username === username);
+  };
+
+  const handleChange = (value) => {
+    setUsername(value);
+  };
+
+  const handleSubmit = (event) => {
+    console.log('user+983493++=====' + findUserByUsername(username));
+    const userId = findUserByUsername(username);
+    setG({
+      users: group.users.map((gg) => gg.id).push(userId),
+    });
+    // console.log(g);
+    groupStore.groupUpdate(g, group.id);
+    // userStore.updateUser(
+    //   { groups: [...findUserByUsername(username).groups, group] },
+    //   findUserByUsername(username).id
+    // );
+    // console.log('=============>>>>>>' + JSON.stringify(group));
+  };
 
   const findUser = async function (group) {
     const currentUser = await Parse.User.currentAsync();
-    console.log(
-      "🚀 ~ file: EditGroups.js ~ line 17 ~ findUser ~ currentUser",
-      currentUser
-    );
+    // console.log(
+    //   '🚀 ~ file: EditGroups.js ~ line 17 ~ findUser ~ currentUser',
+    //   currentUser
+    // );
 
     if (currentUser !== null) {
       Alert.alert(
-        "Success!",
-        `${currentUser.get("username")} is the current user!`,
+        'Success!',
+        `${currentUser.get('username')} is the current user!`,
         group.getUser(currentUser)
       );
     }
@@ -54,7 +81,12 @@ function EditGroups({ userId }) {
               <Modal.Body>
                 <FormControl>
                   <FormControl.Label>username</FormControl.Label>
-                  <Input />
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(text) => {
+                      handleChange(text);
+                    }}
+                  ></TextInput>
                 </FormControl>
               </Modal.Body>
               <Modal.Footer>
@@ -70,7 +102,8 @@ function EditGroups({ userId }) {
                   </Button>
                   <Button
                     onPress={() => {
-                      groupStore.groupUpdate(userId);
+                      // groupStore.groupUpdate(userId);
+                      handleSubmit();
                       setShowModal(false);
                     }}
                   >
@@ -129,6 +162,13 @@ const styles = StyleSheet.create({
   },
   logout: {
     fontSize: 15,
-    color: "red",
+    color: 'red',
+  },
+  input: {
+    height: 30,
+    borderWidth: 1,
+    fontSize: 20,
+    borderColor: 'grey',
+    borderRadius: 5,
   },
 });

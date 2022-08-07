@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Image, Pressable, Button } from "react-native";
-import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
-import groupStore from "../components/stores/groupStore";
-import EditGroups from "./EditGroups";
-import userStore from "./stores/userStore";
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Image, Pressable, Button } from 'react-native';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
+import groupStore from '../components/stores/groupStore';
+import EditGroups from './EditGroups';
+import userStore from './stores/userStore';
 
 export default function Group({ group }) {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ export default function Group({ group }) {
         navigation={navigation}
         key={group._id}
         onPress={() => {
-          navigation.navigate("GroupDetails", {
+          navigation.navigate('GroupDetails', {
             group: group,
 
             id: group.id,
@@ -33,7 +33,7 @@ export default function Group({ group }) {
   // );
 
   const goToDetails = () => {
-    navigation.navigate("GroupDetails", {
+    navigation.navigate('GroupDetails', {
       title: group.title,
       user: group.users,
       image: group.users.image,
@@ -47,7 +47,7 @@ export default function Group({ group }) {
   return (
     <Pressable style={styles.container} onPress={goToDetails}>
       <View style={styles.topEdit}>
-        <EditGroups />
+        <EditGroups group={group} />
       </View>
       <View style={styles.groupInfo}>
         <Image
@@ -65,9 +65,9 @@ export default function Group({ group }) {
           {/* :{JSON.stringify(group.userId)} */}
 
           <Text style={styles.greyFont}>
-            Admin : {group.users.map((u) => u.username)}
+            Users : {group.users.map((u) => u.username)}
           </Text>
-          {console.log("🚀 ~ file: Groups.js ~ line 67 ~ Group ~ group", group)}
+          {console.log('🚀 ~ file: Groups.js ~ line 67 ~ Group ~ group', group)}
           {/* {console.log("🚀 ~ file: Groups.js ~ line 70 ~ Group ~ group", group)} */}
           {/* <Text style={styles.greyFont}>Members </Text> */}
           <Text style={styles.price}>💰${group.finalBudget}</Text>
@@ -84,9 +84,9 @@ export default function Group({ group }) {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: '#f9f9f9',
     borderWidth: 1,
-    borderColor: "white",
+    borderColor: 'white',
     height: 200,
     borderRadius: 9,
     marginBottom: 20,
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     heights: 80,
     borderRadius: 80 / 2,
     borderWidth: 1,
-    borderColor: "#fff",
+    borderColor: '#fff',
   },
   groupInfo: {
     marginHorizontal: 20,
@@ -111,31 +111,33 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   groupInfoBottomLine: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 4,
-    alignItems: "center",
+    alignItems: 'center',
   },
   groupInfoTop: {
     flex: 2,
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 2,
-    alignItems: "center",
+    alignItems: 'center',
   },
   price: {
-    color: "green",
+    color: 'green',
     fontSize: 17,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   greyFont: {
-    color: "grey",
+    color: 'grey',
   },
   topEdit: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
+    marginRight: 10,
+    paddingTop: 5,
   },
   groupNameText: {
     fontSize: 20,
-    fontWeight: "600",
+    fontWeight: '600',
     marginBottom: 3,
   },
 });

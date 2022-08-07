@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx";
-import instance from "../../axios/instance";
+import { makeAutoObservable } from 'mobx';
+import instance from '../../axios/instance';
 class GroupStore {
   groups = [];
   UserGroup = [];
@@ -10,10 +10,10 @@ class GroupStore {
 
   groupGet = async () => {
     try {
-      const response = await instance.get("/groups");
+      const response = await instance.get('/groups');
       this.groups = response.data;
     } catch (error) {
-      console.log("GroupStore -> groupGet -> error", error);
+      console.log('GroupStore -> groupGet -> error', error);
     }
   };
 
@@ -25,27 +25,38 @@ class GroupStore {
       // this.groups = response.data;
       // this.groups.push(response.data);
     } catch (error) {
-      console.log("GroupStore -> fetchGroup -> error", error);
+      console.log('GroupStore -> fetchGroup -> error', error);
     }
   };
 
-  groupUpdate = async (groupId) => {
-    this.groups = this.groups.filter((group) => group._id !== groupId);
+  // groupUpdate = async (groupId) => {
+  //   this.groups = this.groups.filter((group) => group._id !== groupId);
+  //   try {
+  //     const response = await instance.put(`/${groupId}`, groupId);
+  //     this.groups = response.data;
+  //     this.groups.push(response.data);
+  //   } catch (error) {
+  //     console.log("GroupStore -> groupUpdate -> error", error);
+  //   }
+  // };
+
+  groupUpdate = async (updatedGroup, groupId) => {
     try {
-      const response = await instance.put(`/${groupId}`, groupId);
-      this.groups = response.data;
-      this.groups.push(response.data);
+      const res = await instance.put(`/${groupId}`, updatedGroup);
+      this.groups = this.groups.map((group) =>
+        group._id === groupId ? res.data : group
+      );
     } catch (error) {
-      console.log("GroupStore -> groupUpdate -> error", error);
+      console.log(error);
     }
   };
 
   groupDelete = async (groupId) => {
     try {
-      const response = await instance.post("/groups", groupId);
+      const response = await instance.post('/groups', groupId);
       this.groups = response.data;
     } catch (error) {
-      console.log("GroupStore -> groupDelete -> error", error);
+      console.log('GroupStore -> groupDelete -> error', error);
     }
   };
 
@@ -57,12 +68,12 @@ class GroupStore {
       //   formData
       // );
       // for (const key in groupData) formData.append(key, groupData[key]);
-      const response = await instance.post("/groups", groupData);
+      const response = await instance.post('/groups', groupData);
       // this.groups = response.data;
       this.groups.push(response.data);
       //userStore.groups.push(response.data)
     } catch (error) {
-      console.log("GroupStore -> groupCreate -> error", error);
+      console.log('GroupStore -> groupCreate -> error', error);
     }
   };
 }
