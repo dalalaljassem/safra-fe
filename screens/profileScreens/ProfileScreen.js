@@ -7,17 +7,17 @@ import {
   Image,
   Pressable,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+// import { AntDesign } from '@expo/vector-icons';
 import userStore from '../../components/stores/userStore';
 import EditProfileButton from '../../components/EditProfileButton';
 import { observer } from 'mobx-react';
 import destinationStore from '../../components/stores/destinationStore';
 
 function ProfileScreen() {
+  let user = userStore.user;
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Button title="Logout" onPress={userStore.logout}></Button> */}
-
       <View style={styles.edit}>
         <EditProfileButton />
       </View>
@@ -27,43 +27,42 @@ function ProfileScreen() {
           resizeMode="cover"
           style={styles.image}
           source={{
-            uri: userStore.user.image,
+            uri: user.image,
           }}
         />
 
-        <Text style={styles.username}>{userStore.user.username}</Text>
-        <Text style={styles.budget}>${userStore.user.budget}</Text>
+        <Text style={styles.username}>{user.username}</Text>
+        <Text style={styles.budget}>${user.budget}</Text>
       </View>
       <View style={styles.activities}>
         <Text style={styles.activitiesText}>Favourite Activities:</Text>
 
-        {userStore.user.activities.map((activity) => (
-          <Text style={styles.activityItemText}>{activity}</Text>
+        {user.activities.map((activity, index) => (
+          <Text style={styles.activityItemText}>
+            {index + 1}- {activity}
+          </Text>
         ))}
-        {console.log(userStore.user)}
       </View>
       <View style={styles.date}>
         <Text style={styles.dateText}>
-          Departure Date:{' '}
-          {userStore.user.departDate
-            ? userStore.user.departDate.slice(0, 10)
-            : userStore.user.departDate}
+          <Text style={styles.dateText2}>Departure Date: </Text>
+          {user.departDate ? user.departDate.slice(0, 10) : user.departDate}
         </Text>
         <Text style={styles.dateText}>
-          Return Date:{' '}
-          {userStore.user.returnDate
-            ? userStore.user.returnDate.slice(0, 10)
-            : userStore.user.returnDate}
+          <Text style={styles.dateText2}>Return Date: </Text>
+
+          {user.returnDate ? user.returnDate.slice(0, 10) : user.returnDate}
         </Text>
-        <Button
+        {/* <Button
           title="Generate Destinations"
           onPress={() => destinationStore.getDestinationsOfActivities()}
-        />
+        /> */}
       </View>
     </SafeAreaView>
   );
 }
 export default observer(ProfileScreen);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -86,14 +85,15 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   username: {
-    fontSize: 30,
+    fontSize: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
   budget: {
-    fontSize: 15,
+    fontSize: 25,
     alignItems: 'center',
     justifyContent: 'center',
+    color: 'green',
   },
   activities: {
     flex: 3,
@@ -101,12 +101,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   activitiesText: {
-    fontSize: 27,
+    fontSize: 30,
     marginBottom: 10,
+    fontWeight: '700',
   },
   activityItemText: {
-    fontSize: 17,
-    marginLeft: 15,
+    fontSize: 23,
+    marginLeft: 20,
   },
   date: {
     flex: 2,
@@ -114,7 +115,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   dateText: {
-    fontSize: 20,
+    fontSize: 23,
     marginBottom: 10,
+  },
+  dateText2: {
+    fontSize: 23,
+    marginBottom: 10,
+    fontWeight: '700',
   },
 });
