@@ -12,6 +12,7 @@ import userStore from './stores/userStore';
 import { AlertDialog } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { observer } from 'mobx-react';
 
 import { useState, useEffect } from 'react';
 import React from 'react';
@@ -141,7 +142,7 @@ function EditProfileButton() {
           type: img_type,
         },
       });
-      //   setUser({ ...user, image: result.uri });
+      // setUser({ ...user, image: result.uri });
       setImage(result.uri);
     }
   };
@@ -249,7 +250,7 @@ function EditProfileButton() {
                         Select Departure Date
                       </Button>
                     </Box>
-                    <Text>{departDate}</Text>
+                    <Text>{user.departDate}</Text>
                   </View>
 
                   <Modal
@@ -272,7 +273,8 @@ function EditProfileButton() {
                           onDayPress={(day) => {
                             console.log('selected day', day);
                             setSelectedDate(selectDay(day));
-                            setDepartDate(day.dateString);
+
+                            setUser({ ...user, departDate: day.dateString });
                           }}
                           // Handler which gets executed on day long press. Default = undefined
                           onDayLongPress={(day) => {

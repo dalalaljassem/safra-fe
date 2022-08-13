@@ -42,12 +42,12 @@ class GroupStore {
 
   groupUpdate = async (updatedGroup, groupId) => {
     try {
-      const res = await instance.put(`/${groupId}`, updatedGroup);
+      const res = await instance.put(`/groups/${groupId}`, updatedGroup);
       this.groups = this.groups.map((group) =>
         group._id === groupId ? res.data : group
       );
     } catch (error) {
-      console.log(error);
+      console.log('GroupStore -> groupUpdate -> error', error);
     }
   };
 

@@ -5,8 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import groupStore from '../components/stores/groupStore';
 import EditGroups from './EditGroups';
 import userStore from './stores/userStore';
+import { observer } from 'mobx-react';
 
-export default function Group({ group }) {
+function Group({ group }) {
   const navigation = useNavigation();
 
   function GroupItem({ item: group }) {
@@ -65,7 +66,14 @@ export default function Group({ group }) {
           {/* :{JSON.stringify(group.userId)} */}
 
           <Text style={styles.greyFont}>
-            Users : {group.users.map((u) => u.username)}
+            Users :{' '}
+            {group.users.map((u, index) => {
+              if (index !== group.users.length - 1) {
+                return u.username + ', ';
+              } else {
+                return u.username;
+              }
+            })}
           </Text>
           {console.log('🚀 ~ file: Groups.js ~ line 67 ~ Group ~ group', group)}
           {/* {console.log("🚀 ~ file: Groups.js ~ line 70 ~ Group ~ group", group)} */}
@@ -80,6 +88,7 @@ export default function Group({ group }) {
     </Pressable>
   );
 }
+export default observer(Group);
 
 const styles = StyleSheet.create({
   container: {

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import React from 'react';
 import groupStore from './stores/groupStore';
 import userStore from './stores/userStore';
+import { observer } from 'mobx-react';
 
 function EditGroups({ userId, group }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -17,7 +18,7 @@ function EditGroups({ userId, group }) {
   const [username, setUsername] = useState('');
 
   const findUserByUsername = (username) => {
-    return userStore.users.find((user) => user.username === username);
+    return userStore.users.find((u) => u.username === username);
   };
 
   const handleChange = (value) => {
@@ -25,13 +26,14 @@ function EditGroups({ userId, group }) {
   };
 
   const handleSubmit = (event) => {
-    console.log('user+983493++=====' + findUserByUsername(username));
-    const userId = findUserByUsername(username);
+    console.log(findUserByUsername(username));
+    const userId = findUserByUsername(username)._id;
+    console.log(userId);
     setG({
-      users: group.users.map((gg) => gg.id).push(userId),
+      users: [...group.users.map((gg) => gg._id), userId],
     });
-    // console.log(g);
-    groupStore.groupUpdate(g, group.id);
+    console.log(g);
+    groupStore.groupUpdate(g, group._id);
     // userStore.updateUser(
     //   { groups: [...findUserByUsername(username).groups, group] },
     //   findUserByUsername(username).id
@@ -153,7 +155,7 @@ function EditGroups({ userId, group }) {
   );
 }
 
-export default EditGroups;
+export default observer(EditGroups);
 
 const styles = StyleSheet.create({
   edit: {
