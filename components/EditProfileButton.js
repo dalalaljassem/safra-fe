@@ -35,6 +35,7 @@ function EditProfileButton() {
   const [departDate, setDepartDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
   const [selectedDate, setSelectedDate] = useState({});
+  const [selectedDate2, setSelectedDate2] = useState({});
 
   const cancelRef = React.useRef(null);
   const [user, setUser] = useState({
@@ -44,6 +45,18 @@ function EditProfileButton() {
     activities: userStore.user.activities,
     image: userStore.user.image,
   });
+  const formatDate = (date) => {
+    let day = date[8] + date[9];
+    if (date[8] == '0') {
+      day = date[0];
+    }
+    let month = date[5] + date[6];
+    if (date[5] == '0') {
+      month = date[6];
+    }
+    let year = date[0] + date[1] + date[2] + date[3];
+    return `${day} / ${month} / ${year}`;
+  };
   const selectDay = (day) => {
     let date = {};
     date[`${day.dateString}`] = {
@@ -208,7 +221,7 @@ function EditProfileButton() {
                   <View style={styles.imageTitleAndButton}>
                     <FormControl.Label>Image: </FormControl.Label>
                     <Box alignItems="center">
-                      <Button onPress={pickImage}>Add Image</Button>
+                      <Button onPress={pickImage}>Change Image</Button>
                     </Box>
                     <Image
                       resizeMode="cover"
@@ -250,7 +263,7 @@ function EditProfileButton() {
                         Select Departure Date
                       </Button>
                     </Box>
-                    <Text>{user.departDate}</Text>
+                    <Text>{formatDate(user.departDate)}</Text>
                   </View>
 
                   <Modal
@@ -405,7 +418,7 @@ function EditProfileButton() {
                         Select Return Date
                       </Button>
                     </Box>
-                    <Text>{returnDate}</Text>
+                    <Text>{formatDate(user.returnDate)}</Text>
                   </View>
 
                   <Modal
@@ -427,8 +440,8 @@ function EditProfileButton() {
 
                           onDayPress={(day) => {
                             console.log('selected day', day);
-                            setSelectedDate(selectDay(day));
-                            setReturnDate(day.dateString);
+                            setSelectedDate2(selectDay(day));
+                            setUser({ ...user, returnDate: day.dateString });
                           }}
                           // Handler which gets executed on day long press. Default = undefined
                           onDayLongPress={(day) => {
@@ -471,7 +484,7 @@ function EditProfileButton() {
                           // }}
                           // Enable the option to swipe between months. Default = false
                           // markingType={'period'}
-                          markedDates={selectedDate}
+                          markedDates={selectedDate2}
                           // markedDates={{
                           //   '2022-08-16': {
                           //     color: '#C0D6DF',
@@ -528,7 +541,7 @@ function EditProfileButton() {
                             colorScheme="blueGray"
                             onPress={() => {
                               setShowModal2(false);
-                              setSelectedDate({});
+                              setSelectedDate2({});
                             }}
                           >
                             Cancel
@@ -537,7 +550,7 @@ function EditProfileButton() {
                             onPress={() => {
                               // handleSubmit();
                               setShowModal2(false);
-                              setSelectedDate({});
+                              setSelectedDate2({});
                             }}
                           >
                             Save

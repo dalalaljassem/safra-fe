@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, Pressable, Button } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import groupStore from '../components/stores/groupStore';
+import groupStore from './stores/groupStore';
 import EditGroups from './EditGroups';
 import userStore from './stores/userStore';
 import { observer } from 'mobx-react';
@@ -10,46 +10,12 @@ import { useRoute } from '@react-navigation/native';
 function Group({ group }) {
   const navigation = useNavigation();
 
-  function GroupItem({ item: group }) {
-    return (
-      //card
-      <Group
-        group={group}
-        navigation={navigation}
-        key={group._id}
-        onPress={() => {
-          navigation.navigate('GroupDetails', {
-            group: group,
-
-            id: group.id,
-          });
-        }}
-      />
-    );
-  }
-
-  // console.log(
-  //   "this is user============================================",
-  //   userStore.users //undefined
-  // );
-
   const goToDetails = () => {
-    navigation.navigate('GroupDetails', {
-      title: group.title,
-      user: group.users,
-      image: group.users.image,
-    });
-  };
-
-  const addUserToGroup = async () => {
-    await groupStore.groupUpdate(group._id);
+    navigation.navigate('DestinationsList');
   };
 
   return (
     <Pressable style={styles.container} onPress={goToDetails}>
-      <View style={styles.topEdit}>
-        <EditGroups group={group} />
-      </View>
       <View style={styles.groupInfo}>
         <Image
           style={styles.groupImage}
@@ -107,9 +73,9 @@ const styles = StyleSheet.create({
     // width: "100%",
     // height: 100,
     // borderRadius: 60 / 2,
-    width: 80,
-    heights: 80,
-    borderRadius: 80 / 2,
+    width: 90,
+
+    borderRadius: '100%',
     borderWidth: 1,
     borderColor: '#fff',
   },

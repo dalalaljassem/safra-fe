@@ -25,9 +25,9 @@ const SetUpProfile = ({ route }) => {
     activities: [],
     image: '',
   });
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [isOpen3, setIsOpen3] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen2, setIsOpen2] = useState(false);
+  // const [isOpen3, setIsOpen3] = useState(false);
 
   // const onClose = () => setIsOpen(false);
   // const onClose2 = () => setIsOpen2(false);
