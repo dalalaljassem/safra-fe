@@ -75,7 +75,7 @@ function Group({ group }) {
               }
             })}
           </Text>
-          {console.log('🚀 ~ file: Groups.js ~ line 67 ~ Group ~ group', group)}
+          {/* {console.log('🚀 ~ file: Groups.js ~ line 67 ~ Group ~ group', group)} */}
           {/* {console.log("🚀 ~ file: Groups.js ~ line 70 ~ Group ~ group", group)} */}
           {/* <Text style={styles.greyFont}>Members </Text> */}
           <Text style={styles.price}>💰${group.finalBudget}</Text>

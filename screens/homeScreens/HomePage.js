@@ -6,14 +6,14 @@ import {
   SafeAreaView,
   ScrollView,
   RefreshControl,
-} from "react-native";
-import React, { useState } from "react";
+} from 'react-native';
+import React, { useState } from 'react';
 
-import Groups from "../../components/Groups";
-import { PlusCircle } from "react-native-feather";
-import groupStore from "../../components/stores/groupStore";
-import userStore from "../../components/stores/userStore";
-import GroupAddModal from "../../components/GroupAddModal";
+import Groups from '../../components/Groups';
+import { PlusCircle } from 'react-native-feather';
+import groupStore from '../../components/stores/groupStore';
+import userStore from '../../components/stores/userStore';
+import GroupAddModal from '../../components/GroupAddModal';
 //group list
 
 export default function HomePage({ group, navigation }) {
@@ -42,10 +42,10 @@ export default function HomePage({ group, navigation }) {
           <Text style={styles.header}>My Groups 🌟</Text>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("GroupAddModal", { group: group })
+              navigation.navigate('GroupAddModal', { group: group })
             }
           >
-            <PlusCircle color={"black"} />
+            <PlusCircle color={'black'} />
           </TouchableOpacity>
         </View>
 
@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   headerAdd: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginTop: 30,
     marginBottom: 20,
   },
   header: {
     fontSize: 30,
-    fontWeight: "Bold",
+    fontWeight: 'Bold',
   },
 });

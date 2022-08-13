@@ -7,18 +7,28 @@ import React from 'react';
 import groupStore from './stores/groupStore';
 import userStore from './stores/userStore';
 import { observer } from 'mobx-react';
-
+import instance from '../axios/instance';
+const usersGet = async () => {
+  try {
+    const response = await instance.get('/users');
+    return response.data;
+  } catch (error) {
+    console.log('UserStore -> usersGet -> error', error);
+  }
+};
+const usersList = usersGet();
 function EditGroups({ userId, group }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [showModal, setShowModal] = useState(false);
   const onClose = () => setIsOpen(false);
+  const groupUsers = group.users;
   const [g, setG] = useState({
-    users: [],
+    users: groupUsers,
   });
   const [username, setUsername] = useState('');
 
   const findUserByUsername = (username) => {
-    return userStore.users.find((u) => u.username === username);
+    return usersList['_W'].find((u) => u.username === username);
   };
 
   const handleChange = (value) => {
@@ -26,19 +36,49 @@ function EditGroups({ userId, group }) {
   };
 
   const handleSubmit = (event) => {
-    console.log(findUserByUsername(username));
-    const userId = findUserByUsername(username)._id;
-    console.log(userId);
-    setG({
-      users: [...group.users.map((gg) => gg._id), userId],
-    });
-    console.log(g);
-    groupStore.groupUpdate(g, group._id);
-    // userStore.updateUser(
-    //   { groups: [...findUserByUsername(username).groups, group] },
-    //   findUserByUsername(username).id
-    // );
-    // console.log('=============>>>>>>' + JSON.stringify(group));
+    if (!username.includes(',')) {
+      console.log('user====>' + findUserByUsername(username));
+      const userIdd = findUserByUsername(username)._id;
+      console.log(userIdd);
+      console.log('before', groupUsers);
+
+      setG({
+        users: [...groupUsers, userIdd],
+      });
+      groupUsers.push(userIdd);
+
+      console.log(g);
+      groupStore.groupUpdate(g, group._id);
+      userStore.updateUser(
+        { groups: [...findUserByUsername(username).groups, group] },
+        userIdd
+      );
+      // console.log('=============>>>>>>' + JSON.stringify(group));
+    } else {
+      const usernamesList = username.split(',');
+      const usersIdList = [];
+      usernamesList.forEach((u) => usersIdList.push(findUserByUsername(u)._id));
+      console.log('usersIdList====>' + usersIdList);
+      console.log('before', groupUsers);
+
+      // groupUsers.push(userIdd);
+      // console.log('after', groupUsers);
+
+      setG({
+        // users: [...group.users.map((gg) => gg._id), userIdd],
+        users: [...groupUsers, ...usersIdList],
+      });
+      usersIdList.forEach((u) => groupUsers.push(u));
+      console.log(g);
+      groupStore.groupUpdate(g, group._id);
+
+      usernamesList.forEach((u, index) =>
+        userStore.updateUser(
+          { groups: [...findUserByUsername(u).groups, group] },
+          usersIdList[index]
+        )
+      );
+    }
   };
 
   const findUser = async function (group) {
