@@ -16,7 +16,13 @@ const MiddleNavigator = () => {
       }}
     >
       <Screen name="GroupDestinations" component={GroupDestinations} />
-      <Screen name="DestinationsList" component={DestinationsList} />
+      <Screen
+        name="DestinationsList"
+        component={DestinationsList}
+        options={{
+          headerLeft: null,
+        }}
+      />
       <Screen name="DestinationDetails" component={DestinationDetails} />
     </Navigator>
   );

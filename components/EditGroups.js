@@ -119,10 +119,17 @@ function EditGroups({ userId, group }) {
           <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
             <Modal.Content maxWidth="400px">
               <Modal.CloseButton />
-              <Modal.Header>Add User</Modal.Header>
+              <Modal.Header>
+                Invite Users
+                <Text style={styles.inviteHint}>
+                  Hint: You can invite multiple users when seperating with
+                  commas
+                </Text>
+              </Modal.Header>
+
               <Modal.Body>
                 <FormControl>
-                  <FormControl.Label>username</FormControl.Label>
+                  <FormControl.Label>Username</FormControl.Label>
                   <TextInput
                     style={styles.input}
                     onChangeText={(text) => {
@@ -212,5 +219,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderColor: 'grey',
     borderRadius: 5,
+  },
+  inviteHint: {
+    color: 'grey',
+    fontSize: 10,
+    marginTop: 10,
+    fontWeight: '400',
   },
 });

@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     margin: 10,
+    // marginTop: 20,
   },
   header: {
     marginTop: 30,

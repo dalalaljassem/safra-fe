@@ -29,11 +29,9 @@ const SignUpInNavigator = () => {
         //     gestureEnabled: false,
         //  }
         component={SetUpProfile}
-        options={
-          {
-            // headerLeft: null,
-          }
-        }
+        options={{
+          headerLeft: null,
+        }}
       />
     </Navigator>
   );

@@ -6,7 +6,9 @@ import {
   SafeAreaView,
   StyleSheet,
   Image,
+  // CheckBox,
 } from 'react-native';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { Input } from '@rneui/themed';
 import userStore from '../../components/stores/userStore';
 import { Popover, Button, Modal, FormControl, Box } from 'native-base';
@@ -25,6 +27,22 @@ const SetUpProfile = ({ route }) => {
     activities: [],
     image: '',
   });
+
+  const formatDate = (date) => {
+    let day = date[8] + date[9];
+    if (date[8] == '0') {
+      day = date[0];
+    }
+    let month = date[5] + date[6];
+    if (date[5] == '0') {
+      month = date[6];
+    }
+    let year = date[0] + date[1] + date[2] + date[3];
+    if (date == '') {
+      return date;
+    }
+    return `${day} / ${month} / ${year}`;
+  };
   // const [isOpen, setIsOpen] = useState(false);
   // const [isOpen2, setIsOpen2] = useState(false);
   // const [isOpen3, setIsOpen3] = useState(false);
@@ -41,6 +59,8 @@ const SetUpProfile = ({ route }) => {
   // const [returnDate, setReturnDate] = useState('');
   const [selectedDate, setSelectedDate] = useState({});
   const [selectedDate2, setSelectedDate2] = useState({});
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
   const selectDay = (day) => {
     let date = {};
     date[`${day.dateString}`] = {
@@ -87,6 +107,7 @@ const SetUpProfile = ({ route }) => {
       //   },
       // });
       setUser({ ...user, image: result.uri });
+
       setImage(result.uri);
       console.log(user);
     }
@@ -95,7 +116,8 @@ const SetUpProfile = ({ route }) => {
   const handleSubmit = async () => {
     userStore.register(user);
   };
-
+  let activities = ['swimming', 'diving', 'dancing'];
+  let selectedActivities = [];
   return (
     <>
       <SafeAreaView style={styles.mainContainer}>
@@ -110,13 +132,48 @@ const SetUpProfile = ({ route }) => {
           placeholder="Budget"
         />
 
-        <Input
+        {/* <Input
           onChangeText={(activities) => {
             activities = [activities];
             setUser({ ...user, activities });
           }}
           placeholder="Activities"
-        />
+        /> */}
+
+        {/* <CheckBox
+          disabled={false}
+          value={toggleCheckBox}
+          onValueChange={(newValue) => setToggleCheckBox(newValue)}
+        /> */}
+        <View style={styles.activities}>
+          <Text style={styles.selectActivities}>
+            Select Your Favourite Activities:
+          </Text>
+          {activities.map((a) => (
+            <BouncyCheckbox
+              style={styles.activitiesList}
+              size={25}
+              fillColor="#63C9B3"
+              unfillColor="#FFFFFF"
+              text={a}
+              iconInnerStyle={{ borderWidth: 2 }}
+              textStyle={{ fontFamily: 'JosefinSans-Regular' }}
+              onPress={() => {
+                if (selectedActivities.includes(a)) {
+                  selectedActivities = selectedActivities.filter(
+                    (ac) => ac != a
+                  );
+                } else {
+                  selectedActivities.push(a);
+                }
+
+                console.log(selectedActivities);
+
+                setUser({ ...user, activities: selectedActivities });
+              }}
+            />
+          ))}
+        </View>
 
         <View style={styles.dateBtn}>
           <View style={styles.btnWithDate}>
@@ -129,7 +186,7 @@ const SetUpProfile = ({ route }) => {
               </Button>
             </Box>
           </View>
-          <Text>{user.departDate}</Text>
+          <Text>{formatDate(user.departDate)}</Text>
         </View>
 
         <Modal isOpen={showDateModal} onClose={() => setShowDateModal(false)}>
@@ -221,7 +278,7 @@ const SetUpProfile = ({ route }) => {
               </Button>
             </Box>
           </View>
-          <Text>{user.returnDate}</Text>
+          <Text>{formatDate(user.returnDate)}</Text>
         </View>
 
         <Modal isOpen={showDateModal2} onClose={() => setShowDateModal2(false)}>
@@ -385,5 +442,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 15,
+  },
+  activities: {
+    marginLeft: 10,
+    marginBottom: 10,
+  },
+  selectActivities: {
+    marginBottom: 10,
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  activitiesList: {
+    marginBottom: 5,
   },
 });
